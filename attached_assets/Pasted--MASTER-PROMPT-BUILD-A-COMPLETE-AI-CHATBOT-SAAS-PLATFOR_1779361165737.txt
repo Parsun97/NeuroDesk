@@ -1,0 +1,734 @@
+# MASTER PROMPT — BUILD A COMPLETE AI CHATBOT SAAS PLATFORM
+
+You are an elite senior team of:
+
+* SaaS Architects
+* AI Engineers
+* UI/UX Designers
+* SEO Specialists
+* Full Stack Developers
+* DevOps Engineers
+* Conversion Optimization Experts
+* Product Strategists
+
+Your task is to create a FULLY FUNCTIONAL production-ready AI SaaS platform similar to modern AI chatbot companies, but more modern, more conversion-focused, faster, cleaner, and optimized for SEO, growth, monetization, scalability, and trust.
+
+The platform must be COMPLETE and READY TO PUBLISH.
+No placeholders.
+No dummy sections.
+No incomplete logic.
+No fake APIs.
+No missing pages.
+No mock payment flows.
+No unfinished integrations.
+Everything should work.
+
+---
+
+## PRODUCT NAME
+
+Product Name:
+NeuroDesk AI
+
+Tagline:
+Deploy Your AI Support Agent In Minutes
+
+Alternative Taglines:
+
+* The fastest way to add AI to your website
+* Train AI on your business instantly
+* Your AI employee for customer support
+* Chatbot-as-a-Service for modern businesses
+
+---
+
+## CORE PRODUCT IDEA
+
+Businesses can:
+
+1. Sign up
+2. Upload PDFs, docs, website URLs, FAQs
+3. Train a chatbot automatically
+4. Customize chatbot design
+5. Get embed code
+6. Add chatbot to website
+7. Start answering customers automatically using AI
+
+This is a multi-tenant SaaS platform.
+Each customer has isolated bot data.
+
+---
+
+## MAIN GOAL
+
+Create a production-grade AI chatbot SaaS platform with:
+
+* Beautiful modern UI
+* High conversion landing page
+* Authentication system
+* Dashboard
+* AI chatbot creation
+* RAG AI architecture
+* Vector search
+* Payment gateway
+* Subscription plans
+* SEO optimization
+* Analytics
+* Admin panel
+* Real-time chatbot
+* Demo section
+* Trust-building features
+* Mobile responsiveness
+* Dark/light mode
+* Fast loading performance
+* Security best practices
+* Blog for SEO ranking
+* AI chatbot widget system
+* Email automation
+* Scalable architecture
+* Deployment-ready setup
+
+---
+
+## TECH STACK
+
+Frontend:
+
+* Next.js latest version
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+* ShadCN UI
+
+Backend:
+
+* Node.js OR ASP.NET Core API
+* PostgreSQL
+* Prisma ORM
+
+AI Layer:
+
+* OpenAI API
+* RAG architecture
+* LangChain
+* Vector database integration
+
+Vector Database:
+
+* Qdrant
+
+Authentication:
+
+* JWT
+* Google OAuth
+* Email verification
+* Forgot password flow
+
+Payments:
+
+* Stripe
+* Razorpay
+
+Hosting:
+
+* Vercel frontend
+* Railway OR Azure backend
+
+Storage:
+
+* AWS S3 compatible storage
+
+Email:
+
+* Resend or SendGrid
+
+Analytics:
+
+* PostHog
+* Google Analytics
+
+---
+
+## DESIGN STYLE
+
+The design should feel like a billion-dollar AI startup.
+
+Visual inspiration:
+
+* Stripe
+* OpenAI
+* Vercel
+* Intercom
+* Notion
+* Framer
+* Linear
+
+Design Requirements:
+
+* Glassmorphism
+* Gradient accents
+* Clean spacing
+* Smooth animations
+* Premium feel
+* Professional typography
+* Interactive sections
+* Mobile-first responsive design
+* Modern SaaS layouts
+* Floating UI elements
+* AI-themed futuristic visuals
+
+Color Palette:
+
+* Dark premium background
+* Blue/purple AI gradients
+* High contrast CTA buttons
+
+---
+
+## LANDING PAGE STRUCTURE
+
+Create an extremely high-converting landing page.
+
+Sections:
+
+1. Hero Section
+
+* Strong headline
+* AI-focused visuals
+* CTA buttons
+* Live chatbot preview
+* Animated background
+* Customer trust logos
+
+Headline Example:
+"Deploy Your AI Support Agent In Minutes"
+
+Subheadline:
+"Train AI on your website, documents, and knowledge base — then launch a smart chatbot instantly."
+
+Primary CTA:
+"Start Free"
+
+Secondary CTA:
+"Watch Demo"
+
+2. Live Demo Section
+   VERY IMPORTANT.
+
+Users must be able to interact with a real demo chatbot before signing up.
+
+Features:
+
+* Floating demo chatbot
+* Preloaded business knowledge
+* Real AI responses
+* Example prompts
+* Typing animations
+* Suggested questions
+* Trust-building labels
+
+3. Features Section
+   Show visually rich feature cards.
+
+Features:
+
+* Train on PDFs
+* Train on websites
+* Custom branding
+* Human handoff
+* Lead collection
+* AI analytics
+* Smart responses
+* Multi-language support
+* Team collaboration
+* Conversation history
+* AI memory
+* Website embedding
+* Real-time support
+* AI suggestions
+
+4. How It Works Section
+   3-step onboarding process.
+
+Step 1:
+Upload website/docs
+
+Step 2:
+Train AI automatically
+
+Step 3:
+Embed chatbot on your website
+
+5. Pricing Section
+   IMPORTANT.
+
+Pricing must look premium and optimized for conversions.
+
+PLAN 1 — STARTER
+Price: $4/month
+
+Features:
+
+* 1 chatbot
+* 500 messages/month
+* Website training
+* PDF upload
+* Basic analytics
+* Standard support
+* NeuroDesk branding
+
+PLAN 2 — PRO
+Price: $9/month
+
+Features:
+
+* 5 chatbots
+* 5,000 messages/month
+* Advanced analytics
+* Remove branding
+* Lead generation
+* Priority support
+* AI memory
+* Team access
+* API access
+* Custom colors
+
+PLAN 3 — BUSINESS
+Price: $20/month
+
+Features:
+
+* Unlimited chatbots
+* 25,000 messages/month
+* White-label chatbot
+* Advanced AI training
+* Team collaboration
+* CRM integrations
+* Webhook support
+* Custom domains
+* Premium support
+* Conversation exports
+* Custom AI instructions
+* Analytics dashboard
+
+Pricing Features:
+
+* Monthly/yearly toggle
+* Savings badge
+* Most popular highlight
+* Animated cards
+* FAQ under pricing
+
+6. Testimonials Section
+   Create realistic professional testimonials.
+
+7. FAQ Section
+   SEO optimized FAQ.
+
+8. Blog Preview Section
+   For SEO.
+
+9. Final CTA Section
+   Strong conversion CTA.
+
+10. Footer
+    Include:
+
+* Privacy policy
+* Terms
+* Contact
+* API docs
+* Social links
+* Careers
+* Blog
+
+---
+
+## AUTHENTICATION SYSTEM
+
+Fully functional authentication.
+
+Features:
+
+* Signup
+* Login
+* Google login
+* Email verification
+* Password reset
+* Session handling
+* Secure JWT auth
+* Protected dashboard routes
+
+---
+
+## USER DASHBOARD
+
+Create a premium SaaS dashboard.
+
+Dashboard Features:
+
+* Create chatbot
+* Upload knowledge base
+* Crawl website
+* Manage bots
+* View conversations
+* AI analytics
+* Billing management
+* API keys
+* Widget customization
+* Subscription management
+* Usage tracking
+* Team members
+* Dark/light mode
+
+---
+
+## CHATBOT CREATION FLOW
+
+Flow:
+
+1. Create bot
+2. Add bot name
+3. Add company name
+4. Upload PDFs/docs
+5. Add website URL
+6. AI crawls content
+7. Generate embeddings
+8. Store in vector DB
+9. Configure chatbot
+10. Generate embed code
+
+---
+
+## AI SYSTEM REQUIREMENTS
+
+Must implement RAG architecture.
+
+Features:
+
+* Website crawling
+* PDF parsing
+* Embeddings generation
+* Vector similarity search
+* Context retrieval
+* GPT response generation
+* Streaming responses
+* Conversation memory
+* Multi-language support
+* Token optimization
+
+Use:
+
+* OpenAI embeddings
+* GPT models
+* LangChain
+* Qdrant vector DB
+
+---
+
+## CHATBOT WIDGET
+
+Create a production-grade embeddable chatbot widget.
+
+Requirements:
+
+* Floating bubble
+* Custom colors
+* Branding support
+* Typing animation
+* Mobile responsive
+* Smooth animations
+* AI avatars
+* Minimize/maximize
+* Real-time responses
+* Welcome messages
+* Suggested prompts
+* Human handoff button
+
+Embed Script Example:
+
+<script src="https://neurodesk.ai/widget.js"></script>
+
+---
+
+## PAYMENT GATEWAY SYSTEM
+
+IMPORTANT.
+
+Integrate fully working payment systems.
+
+Use:
+
+* Stripe
+* Razorpay
+
+Requirements:
+
+* Subscription checkout
+* Monthly plans
+* Webhook handling
+* Upgrade/downgrade
+* Cancel subscription
+* Billing history
+* Payment success/failure handling
+* Trial periods
+* Secure invoices
+* Auto-renewal
+
+After successful payment:
+
+* User subscription updates automatically
+* Features unlock instantly
+
+---
+
+## ADMIN PANEL
+
+Create an internal admin dashboard.
+
+Features:
+
+* View users
+* Manage subscriptions
+* View chatbot usage
+* Revenue analytics
+* Ban users
+* Manage support tickets
+* System monitoring
+* AI usage tracking
+* Blog management
+
+---
+
+## SEO REQUIREMENTS
+
+VERY IMPORTANT.
+
+The website must be built for SEO ranking.
+
+Requirements:
+
+* SEO optimized structure
+* Dynamic metadata
+* Open Graph tags
+* Twitter cards
+* Structured schema markup
+* AI chatbot keywords
+* Fast page speed
+* Lazy loading
+* Sitemap.xml
+* Robots.txt
+* Blog system
+* Keyword optimization
+* Semantic HTML
+* Internal linking
+* Canonical URLs
+* Optimized images
+* Rich snippets
+* FAQ schema
+* Mobile SEO optimization
+* Core Web Vitals optimization
+
+Target Keywords:
+
+* AI chatbot for website
+* Chatbot SaaS
+* AI customer support
+* AI website assistant
+* GPT chatbot
+* AI support agent
+* AI chatbot builder
+* ChatGPT for business
+* Website AI assistant
+
+---
+
+## BLOG SYSTEM
+
+Create a complete blog system for SEO growth.
+
+Requirements:
+
+* Categories
+* Tags
+* Rich editor
+* SEO metadata
+* Featured images
+* Related posts
+* Search functionality
+* Reading progress bar
+
+Generate 10 SEO articles automatically.
+
+---
+
+## SECURITY REQUIREMENTS
+
+Implement:
+
+* Rate limiting
+* CSRF protection
+* XSS protection
+* Secure auth
+* Encrypted secrets
+* Input validation
+* API protection
+* File upload security
+* Tenant isolation
+* GDPR compliance basics
+
+---
+
+## PERFORMANCE REQUIREMENTS
+
+Requirements:
+
+* Lighthouse score above 90
+* Fast loading speed
+* Optimized images
+* CDN-ready assets
+* Lazy loading
+* Streaming AI responses
+* Efficient caching
+* Optimized DB queries
+
+---
+
+## TRUST BUILDING FEATURES
+
+Add:
+
+* Live demo chatbot
+* Customer logos
+* Testimonials
+* Security badges
+* Uptime section
+* Real analytics preview
+* Case studies
+* ROI calculator
+* FAQ
+* Product comparison section
+* Transparent pricing
+* Contact form
+* Live chat support
+
+---
+
+## UNIQUE DIFFERENTIATORS
+
+The product should stand out from existing chatbot companies.
+
+Add these unique features:
+
+1. AI Personality Modes
+
+* Professional
+* Friendly
+* Sales-focused
+* Technical
+* Luxury brand tone
+
+2. Instant AI Training Score
+   Show how well-trained the chatbot is.
+
+3. AI Hallucination Detection
+   Warn when AI confidence is low.
+
+4. AI Conversation Insights
+   Show what customers ask most.
+
+5. Auto FAQ Generator
+   AI automatically creates FAQs from uploaded docs.
+
+6. Lead Collection AI
+   Automatically capture visitor leads.
+
+7. Smart Suggestions
+   AI suggests improvements to customer support.
+
+8. Multi-language AI
+   Auto-detect user language.
+
+---
+
+## DEPLOYMENT REQUIREMENTS
+
+The project must be deployment-ready.
+
+Include:
+
+* Environment variables
+* Docker setup
+* CI/CD configuration
+* Production build configs
+* Database migrations
+* Deployment instructions
+* Vercel compatibility
+* Railway/Azure compatibility
+
+---
+
+## FILE STRUCTURE
+
+Generate a scalable enterprise-grade folder structure.
+
+---
+
+## DELIVERABLES
+
+Generate:
+
+* Fully working frontend
+* Fully working backend
+* AI integration
+* Payment integration
+* Database schema
+* APIs
+* Dashboard
+* Landing page
+* Widget system
+* Admin panel
+* SEO setup
+* Deployment configs
+* Responsive design
+* Production-ready architecture
+
+---
+
+## IMPORTANT FINAL INSTRUCTIONS
+
+This should NOT look like a beginner project.
+
+This should look like:
+
+* A venture-backed AI startup
+* A modern billion-dollar SaaS company
+* Enterprise-grade production software
+
+Everything must be:
+
+* Realistic
+* Functional
+* Scalable
+* Secure
+* Beautiful
+* Fast
+* SEO optimized
+* Mobile responsive
+* Monetization-ready
+* Ready for real customers
+
+The entire platform should be complete enough that it can:
+
+* Be deployed immediately
+* Accept real users
+* Process real payments
+* Generate recurring revenue
+* Scale into a real startup
+
+No placeholders.
+No unfinished logic.
+No fake UI.
+No demo-only implementation.
+Everything should work end-to-end.

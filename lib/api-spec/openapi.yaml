@@ -1,0 +1,892 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: NeuroDesk AI API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: chatbots
+    description: Chatbot management
+  - name: conversations
+    description: Chatbot conversations and messages
+  - name: knowledge
+    description: Knowledge base sources
+  - name: plans
+    description: Subscription plans
+  - name: stats
+    description: Usage statistics and analytics
+  - name: openai
+    description: OpenAI AI chat operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  # ── Chatbots ──────────────────────────────────────────────
+  /chatbots:
+    get:
+      operationId: listChatbots
+      tags: [chatbots]
+      summary: List all chatbots for the current user
+      responses:
+        "200":
+          description: List of chatbots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Chatbot"
+    post:
+      operationId: createChatbot
+      tags: [chatbots]
+      summary: Create a new chatbot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatbotInput"
+      responses:
+        "201":
+          description: Created chatbot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chatbot"
+
+  /chatbots/{id}:
+    get:
+      operationId: getChatbot
+      tags: [chatbots]
+      summary: Get a chatbot by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Chatbot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chatbot"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+    patch:
+      operationId: updateChatbot
+      tags: [chatbots]
+      summary: Update a chatbot
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatbotUpdate"
+      responses:
+        "200":
+          description: Updated chatbot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chatbot"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+    delete:
+      operationId: deleteChatbot
+      tags: [chatbots]
+      summary: Delete a chatbot
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+  /chatbots/{id}/train:
+    post:
+      operationId: trainChatbot
+      tags: [chatbots]
+      summary: Trigger training for a chatbot
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Training started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chatbot"
+
+  /chatbots/{id}/embed-code:
+    get:
+      operationId: getChatbotEmbedCode
+      tags: [chatbots]
+      summary: Get the embed script snippet for a chatbot
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Embed code snippet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmbedCode"
+
+  # ── Knowledge sources ─────────────────────────────────────
+  /chatbots/{id}/sources:
+    get:
+      operationId: listSources
+      tags: [knowledge]
+      summary: List all knowledge sources for a chatbot
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of sources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/KnowledgeSource"
+    post:
+      operationId: createSource
+      tags: [knowledge]
+      summary: Add a knowledge source
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KnowledgeSourceInput"
+      responses:
+        "201":
+          description: Created source
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeSource"
+
+  /chatbots/{id}/sources/{sourceId}:
+    delete:
+      operationId: deleteSource
+      tags: [knowledge]
+      summary: Delete a knowledge source
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Widget conversations ───────────────────────────────────
+  /chatbots/{id}/chat:
+    post:
+      operationId: chatWithBot
+      tags: [conversations]
+      summary: Send a message to a chatbot widget (streaming SSE)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatMessageInput"
+      responses:
+        "200":
+          description: SSE stream of AI response chunks
+          content:
+            text/event-stream: {}
+
+  /chatbots/{id}/conversations:
+    get:
+      operationId: listBotConversations
+      tags: [conversations]
+      summary: List all widget conversations for a chatbot
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BotConversation"
+
+  /chatbots/{id}/conversations/{convId}:
+    get:
+      operationId: getBotConversation
+      tags: [conversations]
+      summary: Get a conversation with its messages
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: convId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Conversation with messages
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BotConversationWithMessages"
+
+  # ── Stats / analytics ─────────────────────────────────────
+  /stats/dashboard:
+    get:
+      operationId: getDashboardStats
+      tags: [stats]
+      summary: Get dashboard summary stats for the current user
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /chatbots/{id}/stats:
+    get:
+      operationId: getChatbotStats
+      tags: [stats]
+      summary: Get per-chatbot analytics
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Chatbot stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatbotStats"
+
+  # ── Plans ─────────────────────────────────────────────────
+  /plans:
+    get:
+      operationId: listPlans
+      tags: [plans]
+      summary: List all subscription plans
+      responses:
+        "200":
+          description: List of plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Plan"
+
+  # ── OpenAI playground conversations ───────────────────────
+  /openai/conversations:
+    get:
+      operationId: listOpenaiConversations
+      tags: [openai]
+      summary: List all AI playground conversations
+      responses:
+        "200":
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OpenaiConversation"
+    post:
+      operationId: createOpenaiConversation
+      tags: [openai]
+      summary: Create a new conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenaiConversationInput"
+      responses:
+        "201":
+          description: Created conversation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiConversation"
+
+  /openai/conversations/{id}:
+    get:
+      operationId: getOpenaiConversation
+      tags: [openai]
+      summary: Get conversation with messages
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Conversation with messages
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiConversationWithMessages"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiError"
+    delete:
+      operationId: deleteOpenaiConversation
+      tags: [openai]
+      summary: Delete a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiError"
+
+  /openai/conversations/{id}/messages:
+    get:
+      operationId: listOpenaiMessages
+      tags: [openai]
+      summary: List messages in a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OpenaiMessage"
+    post:
+      operationId: sendOpenaiMessage
+      tags: [openai]
+      summary: Send a text message and receive a streaming response
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenaiMessageInput"
+      responses:
+        "200":
+          description: SSE stream of assistant text chunks
+          content:
+            text/event-stream: {}
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ApiError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    # ── Chatbots ──────────────────────────────────────────────
+    Chatbot:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: string
+        name:
+          type: string
+        companyName:
+          type: string
+        description:
+          type: ["string", "null"]
+        status:
+          type: string
+          enum: [draft, training, ready, error]
+        personality:
+          type: string
+          enum: [professional, friendly, sales, technical, luxury]
+        primaryColor:
+          type: string
+        welcomeMessage:
+          type: string
+        trainingScore:
+          type: ["integer", "null"]
+        totalMessages:
+          type: integer
+        totalConversations:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - name
+        - companyName
+        - status
+        - personality
+        - primaryColor
+        - welcomeMessage
+        - totalMessages
+        - totalConversations
+        - createdAt
+        - updatedAt
+
+    ChatbotInput:
+      type: object
+      properties:
+        name:
+          type: string
+        companyName:
+          type: string
+        description:
+          type: string
+        personality:
+          type: string
+          enum: [professional, friendly, sales, technical, luxury]
+        primaryColor:
+          type: string
+        welcomeMessage:
+          type: string
+      required:
+        - name
+        - companyName
+
+    ChatbotUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        companyName:
+          type: string
+        description:
+          type: string
+        personality:
+          type: string
+          enum: [professional, friendly, sales, technical, luxury]
+        primaryColor:
+          type: string
+        welcomeMessage:
+          type: string
+
+    EmbedCode:
+      type: object
+      properties:
+        snippet:
+          type: string
+        botId:
+          type: integer
+      required:
+        - snippet
+        - botId
+
+    # ── Knowledge sources ─────────────────────────────────────
+    KnowledgeSource:
+      type: object
+      properties:
+        id:
+          type: integer
+        chatbotId:
+          type: integer
+        type:
+          type: string
+          enum: [url, text, faq]
+        title:
+          type: string
+        content:
+          type: string
+        status:
+          type: string
+          enum: [pending, processed, error]
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - chatbotId
+        - type
+        - title
+        - content
+        - status
+        - createdAt
+
+    KnowledgeSourceInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [url, text, faq]
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - type
+        - title
+        - content
+
+    # ── Widget conversations ───────────────────────────────────
+    ChatMessageInput:
+      type: object
+      properties:
+        message:
+          type: string
+        sessionId:
+          type: string
+      required:
+        - message
+        - sessionId
+
+    BotConversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        chatbotId:
+          type: integer
+        sessionId:
+          type: string
+        messageCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - chatbotId
+        - sessionId
+        - messageCount
+        - createdAt
+
+    BotConversationWithMessages:
+      type: object
+      properties:
+        id:
+          type: integer
+        chatbotId:
+          type: integer
+        sessionId:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/BotMessage"
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - chatbotId
+        - sessionId
+        - messages
+        - createdAt
+
+    BotMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        conversationId:
+          type: integer
+        role:
+          type: string
+          enum: [user, assistant]
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - conversationId
+        - role
+        - content
+        - createdAt
+
+    # ── Stats ─────────────────────────────────────────────────
+    DashboardStats:
+      type: object
+      properties:
+        totalChatbots:
+          type: integer
+        totalConversations:
+          type: integer
+        totalMessages:
+          type: integer
+        activeChatbots:
+          type: integer
+        messagesThisMonth:
+          type: integer
+        topBots:
+          type: array
+          items:
+            $ref: "#/components/schemas/TopBot"
+      required:
+        - totalChatbots
+        - totalConversations
+        - totalMessages
+        - activeChatbots
+        - messagesThisMonth
+        - topBots
+
+    TopBot:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        messageCount:
+          type: integer
+      required:
+        - id
+        - name
+        - messageCount
+
+    ChatbotStats:
+      type: object
+      properties:
+        totalConversations:
+          type: integer
+        totalMessages:
+          type: integer
+        averageMessagesPerConversation:
+          type: number
+        trainingScore:
+          type: ["integer", "null"]
+        sourceCount:
+          type: integer
+      required:
+        - totalConversations
+        - totalMessages
+        - averageMessagesPerConversation
+        - sourceCount
+
+    # ── Plans ─────────────────────────────────────────────────
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        priceMonthly:
+          type: number
+        priceYearly:
+          type: number
+        chatbotLimit:
+          type: ["integer", "null"]
+        messageLimit:
+          type: integer
+        features:
+          type: array
+          items:
+            type: string
+        popular:
+          type: boolean
+      required:
+        - id
+        - name
+        - priceMonthly
+        - priceYearly
+        - messageLimit
+        - features
+        - popular
+
+    # ── OpenAI ────────────────────────────────────────────────
+    OpenaiConversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - createdAt
+
+    OpenaiMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        conversationId:
+          type: integer
+        role:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - conversationId
+        - role
+        - content
+        - createdAt
+
+    OpenaiConversationInput:
+      type: object
+      properties:
+        title:
+          type: string
+      required:
+        - title
+
+    OpenaiMessageInput:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+
+    OpenaiConversationWithMessages:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/OpenaiMessage"
+      required:
+        - id
+        - title
+        - createdAt
+        - messages
+
+    OpenaiError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
