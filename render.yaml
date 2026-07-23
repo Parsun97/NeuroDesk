@@ -7,7 +7,7 @@ services:
   - type: web
     name: neurodesk
     runtime: node
-    plan: starter
+    plan: free
     region: oregon
     buildCommand: corepack enable && pnpm install --frozen-lockfile=false && pnpm run build
     startCommand: node artifacts/api-server/dist/index.mjs
