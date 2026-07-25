@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayout } from "@/components/layout";
 import { SEO } from "@/components/seo";
-import { useCreateChatbot, useCreateSource, useTrainChatbot } from "@workspace/api-client-react";
+import { useCreateChatbot, useCreateSource, useTrainChatbot, getChatbotEmbedCode } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -82,7 +82,8 @@ export default function ChatbotsNew() {
         // Train
         await trainMutation.mutateAsync({ id: botId });
 
-        setEmbedCode(`<!-- NeuroDesk AI Widget -->\n<script>\n  window.NeuroDeskConfig = { botId: ${botId} };\n</script>\n<script src="https://widget.neurodesk.ai/widget.js" async></script>`);
+        const { snippet } = await getChatbotEmbedCode(botId);
+        setEmbedCode(snippet);
 
         queryClient.invalidateQueries({ queryKey: ["/api/chatbots"] });
         setStep(3);
